@@ -27,6 +27,32 @@
         <i class="fas fa-underline"></i>
       </button>
       <div class="seperator"></div>
+      <div class="dropdown-trigger" id="style-button">
+        Normal
+        <i class="fas fa-angle-down align-end"></i>
+        <div class="dropdown-content">
+          <p class="dropdown-item" onclick="transform('fontSize', '3')">Normal</p>
+          <h1 class="dropdown-item" onclick="transform('fontSize', '7')">Title</h1>
+          <h2 class="dropdown-item" onclick="transform('fontSize', '6')">Subtitle</h2>
+          <h3 class="dropdown-item" onclick="transform('fontSize', '5')">Heading 1</h3>
+          <h4 class="dropdown-item" onclick="transform('fontSize', '4')">Heading 2</h4>
+          <p class="dropdown-item" onclick="transform('fontSize', '2')" style="font-size: small;">Small 1</p>
+          <p class="dropdown-item" onclick="transform('fontSize', '1')" style="font-size: x-small;">Small 2</p>
+        </div>
+      </div>
+      <div class="seperator"></div>
+      <div class="dropdown-trigger" id="font-button">
+        Verdana
+        <i class="fas fa-angle-down align-end"></i>
+        <div class="dropdown-content">
+          <p class="dropdown-item" onclick="transform('fontName', 'Verdana')" style="font-family: 'Verdana';">Verdana</p>
+          <p class="dropdown-item" onclick="transform('fontName', 'Times New Roman')" style="font-family: 'Times New Roman';">Times New Roman</p>
+          <p class="dropdown-item" onclick="transform('fontName', 'Arial')" style="font-family: 'Arial';">Arial</p>
+          <p class="dropdown-item" onclick="transform('fontName', 'Courier New')" style="font-family: 'Courier New';">Courier New</p>
+          <p class="dropdown-item" onclick="transform('fontName', 'Tahoma')" style="font-family: 'Tahoma';">Tahoma</p>
+        </div>
+      </div>
+      <div class="seperator"></div>
       <button onClick="transform('justifyLeft', null)">
         <i class="fas fa-align-left"></i>
       </button>
@@ -50,17 +76,6 @@
       <button onClick="onCreateLinkClick()">
         <i class="fas fa-link"></i>
       </button>
-      <div class="seperator"></div>
-      <select onChange="transform('fontName', this.value)">
-        <option disabled default>Font</option>
-        <option value="Times New Roman">Times</option>
-        <option value="Arial">Arial</option>
-        <option value="Courier New">Courier New</option>
-        <option value="Tahoma">Tahoma</option>
-        <option value="Arial">Verdana</option>
-      </select>
-      <div class="seperator"></div>
-      <input type="number" onChange="transform('fontSize', this.value)" value="3" max="7" min="1"></input>
     </div>
     <iframe name="editor" id="editor"></iframe>
   </div>
