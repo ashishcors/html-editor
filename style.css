@@ -1,182 +1,244 @@
 html {
-  height: 100vh;
+    height: 100vh;
 }
+
 body {
-  margin: 0;
-  height: 100vh;
-  background-color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: 'Helvetica', 'Arial', sans-serif;
-  color: #333;
+    margin: 0;
+    height: 100vh;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Helvetica', 'Arial', sans-serif;
+    color: #333;
 }
+
 .wrapper {
-  margin-left: 8px;
-  margin-right: 8px;
-  display: flex;
-  flex-flow: column;
-  width: 100%;
-  height: 100vh;
+    margin-left: 8px;
+    margin-right: 8px;
+    display: flex;
+    flex-flow: column;
+    width: 100%;
+    height: 100vh;
 }
+
 #main-title {
-  margin: 0;
-  padding-bottom: 5pt;
-  border-bottom: 1px solid #ddd;
+    margin: 0;
+    padding-bottom: 5pt;
+    border-bottom: 1px solid #ddd;
 }
+
 input[type="text"] {
-  height: 20pt;
-  width: 100%;
-  padding: 0;
-  border: 0;
-  outline: none;
-  font-size: 14px;
-  margin-top: 5pt;
+    height: 20pt;
+    width: 100%;
+    padding: 0;
+    border: 0;
+    outline: none;
+    font-size: 14px;
+    margin-top: 5pt;
 }
+
 .options {
-  width: 100%;
-  margin-top: 5pt;
-  border-top: 1px solid #ddd;
+    width: 100%;
+    margin-top: 5pt;
+    border-top: 1px solid #ddd;
 }
 
 iframe {
-  border: 0;
-  width: 100%;
-  margin-bottom: 5pt;
-  flex: 1 1 auto;
+    border: 0;
+    width: 100%;
+    margin-bottom: 5pt;
+    flex: 1 1 auto;
 }
+
 .seperator {
-  display: inline;
-  border-left: 1px solid #ddd;
+    display: inline;
+    border-left: 1px solid #ddd;
 }
+
 button {
-  margin: 0;
-  padding: 0;
-  height: 30pt;
-  width: 30pt;
-  background-color: #fff;
-  border: 0;
-  cursor: pointer;
-  color: #333;
+    margin: 0;
+    padding: 0;
+    height: 30pt;
+    width: 30pt;
+    background-color: #fff;
+    border: 0;
+    cursor: pointer;
+    color: #333;
 }
-button:active {
-  color: #333;
+
+button:active {
+    color: #333;
 }
+
 select {
-  height: 30pt;
-  -webkit-appearance: none;
-  border: 0;
-  padding-left: 5pt;
-  padding-right: 5pt;
-  outline: none;
+    height: 30pt;
+    -webkit-appearance: none;
+    border: 0;
+    padding-left: 5pt;
+    padding-right: 5pt;
+    outline: none;
 }
+
 input[type="number"] {
-  height: 30pt;
-  border: 0;
-  padding: 0;
-  padding-left: 5pt;
-  padding-right: 5pt;
-  outline: none;
+    height: 30pt;
+    border: 0;
+    padding: 0;
+    padding-left: 5pt;
+    padding-right: 5pt;
+    outline: none;
 }
+
 
 /*-------------------------- emoji dropdown related css - start ------------------------ */
 
-.emoji-dropdown-trigger{
-  text-align: center;
-  cursor: pointer;
-  position: relative;
-  display: inline-block;
-  margin: 0;
-  padding: 0;
-  height: 30pt;
-  width: 30pt;
-  background-color: #fff;
+.emoji-dropdown-trigger {
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    height: 30pt;
+    width: 30pt;
+    background-color: #fff;
 }
 
-.emoji-dropdown-div{
-  width: 300px;
-  max-height: 400px;
-  overflow: scroll;
-  border-radius: 4px;
-  left: 0;
-  right: 0;
-  top: 104%;
-  background-color: white;
-  border: 1px solid grey;
-  visibility: hidden;
-  opacity: 0;
-  transition: opacity 0.3s;
-  position: absolute;
+.emoji-dropdown-div {
+    width: 262px;
+    max-height: 400px;
+    overflow: scroll;
+    border-radius: 4px;
+    left: 0;
+    right: 0;
+    top: 104%;
+    background-color: white;
+    border: 1px solid grey;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s;
+    position: absolute;
 }
 
-.emoji-dropdown-div.active{
-  visibility: visible;
-  opacity: 1;
+.emoji-dropdown-div.active {
+    visibility: visible;
+    opacity: 1;
 }
 
-.emoji-dropdown-item{
-  margin: 0;
-  padding: 8px 8px;
-  cursor: pointer;
+.emoji-dropdown-div::-webkit-scrollbar{
+    width: 5px;
+}
+/* Track */
+.emoji-dropdown-div::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+  
+  /* Handle */
+.emoji-dropdown-div::-webkit-scrollbar-thumb {
+  background: #888;
+}
+  
+/* Handle on hover */
+.emoji-dropdown-div::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
 
-.emoji-dropdown-item:hover{
-  background-color: #ddd;
+.emoji-dropdown-item {
+    width: 20px;
+    height: 20px;
+    margin: 0;
+    padding: 8px 8px;
+    cursor: pointer;
 }
+
+.emoji-dropdown-item:hover {
+    background-color: #ddd;
+}
+
+.emoji-tab {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    background-color: #ccc;
+}
+
+.emoji-tab::-webkit-scrollbar {
+    display: none;
+}
+
+.emoji-tab-item {
+    width: 35px;
+    height: 25px;
+    margin: 0;
+    padding: 8px 8px;
+    cursor: pointer;
+    flex: 0 0 auto;
+}
+
+.emoji-tab-item:hover {
+    background-color: #ddd;
+}
+.emoji-tab-item.active {
+    background-color: #eee;
+}
+
 
 /*-------------------------- emoji dropdown related css - end ------------------------ */
 
+
 /*------------------------------ dropdown related css - start ---------------------------- */
 
-.dropdown-trigger{
-  margin: 0 10px;
-  cursor: pointer;
-  font-size: small;
-  width: 120px;
-  position: relative;
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid grey;
-  padding: 4px 12px;
+.dropdown-trigger {
+    margin: 0 10px;
+    cursor: pointer;
+    font-size: small;
+    width: 120px;
+    position: relative;
+    display: inline-block;
+    border-radius: 4px;
+    border: 1px solid grey;
+    padding: 4px 12px;
 }
 
-.dropdown-text{
-  float: left;
+.dropdown-text {
+    float: left;
 }
 
-.dropdown-div{
-  min-width: 120px;
-  max-width: 300px;
-  max-height: 400px;
-  overflow: scroll;
-  border-radius: 4px;
-  left: 0;
-  right: 0;
-  top: 104%;
-  background-color: white;
-  border: 1px solid grey;
-  visibility: hidden;
-  opacity: 0;
-  transition: opacity 0.3s;
-  position: absolute;
+.dropdown-div {
+    min-width: 120px;
+    max-width: 300px;
+    max-height: 400px;
+    overflow: scroll;
+    border-radius: 4px;
+    left: 0;
+    right: 0;
+    top: 104%;
+    background-color: white;
+    border: 1px solid grey;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s;
+    position: absolute;
 }
 
-.dropdown-div.active{
-  visibility: visible;
-  opacity: 1;
+.dropdown-div.active {
+    visibility: visible;
+    opacity: 1;
 }
 
-.dropdown-item{
-  margin: 0;
-  padding: 8px 8px;
-  cursor: pointer;
+.dropdown-item {
+    margin: 0;
+    padding: 8px 8px;
+    cursor: pointer;
 }
 
-.dropdown-item:hover{
-  background-color: #ddd;
+.dropdown-item:hover {
+    background-color: #ddd;
 }
 
-.align-end{
-  float: right;
+.align-end {
+    float: right;
 }
+
+
 /*------------------------------ dropdown related css - end ---------------------------- */
