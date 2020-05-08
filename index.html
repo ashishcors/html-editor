@@ -12,7 +12,7 @@
 <body>
   <div class="wrapper">
     <h1 id="main-title">New Blog</h1>
-    <input type="text" placeholder="Title">
+    <input type="text" placeholder="Title" id="title">
     <div class="options">
       <button onClick="transform('bold', null)">
         <i class="fas fa-bold"></i>
@@ -26,6 +26,8 @@
       <button onClick="transform('underline', null)">
         <i class="fas fa-underline"></i>
       </button>
+      <div class="seperator"></div>
+      <div id="emoji-button" class="emoji-dropdown-trigger">😀</div>
       <div class="seperator"></div>
       <div class="dropdown-trigger" id="style-button">
         Normal
@@ -70,7 +72,7 @@
         <i class="fas fa-list-ul"></i>
       </button>
       <div class="seperator"></div>
-      <button onClick="onCodeBlockClick()">
+      <button onClick="onAddCodeBlockClick()">
         <i class="fas fa-code"></i>
       </button>
       <button onClick="onCreateLinkClick()">

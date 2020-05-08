@@ -6,11 +6,16 @@ window.onload = function () {
   //since the editor is an iframe, it doesn't contain any script or css.
   //following code add prism.css to the editor
   let head = editor.document.getElementsByTagName('head')[0];
-  let link = editor.document.createElement('link');
-  link.rel = 'stylesheet';
-  link.type = 'text/css';
-  link.href = 'prism/prism.css';
-  head.appendChild(link);
+  let prismCss = editor.document.createElement('link');
+  prismCss.rel = 'stylesheet';
+  prismCss.type = 'text/css';
+  prismCss.href = 'prism/prism.css';
+  head.appendChild(prismCss);
+  let editorCss = editor.document.createElement('link');
+  editorCss.rel = 'stylesheet';
+  editorCss.type = 'text/css';
+  editorCss.href = 'editor/editor.css';
+  head.appendChild(editorCss);
 
   //following code add prism.js to editor
   let body = editor.document.getElementsByTagName('body')[0];
@@ -26,16 +31,39 @@ window.onload = function () {
   const dropdownStyle = new DropDown(document.querySelector("#style-button"));
   dropdownStyle.init();
 
-  //initializes th efromdown for font-family button 
+  //initializes the dropdown for font-family button 
   const dropdownFont = new DropDown(document.querySelector("#font-button"));
   dropdownFont.init();
+
+  //initializes the dropdown for emoji button 
+  const dropdownEmoji = new EmojiDropDown(document.querySelector("#emoji-button"));
+  dropdownEmoji.init((emoji) =>{this.console.log(emoji)});
 
   //to hide the dropdowns of the use clicks on outside the dropdown
   //TODO:The dropdown doesn't hides when clicked on editor area.
   document.querySelector('body').addEventListener('click', (e) => {
     if (e.target != dropdownStyle.element) dropdownStyle.hide();
     if (e.target != dropdownFont.element) dropdownFont.hide();
+    if (e.target != dropdownEmoji.element) dropdownEmoji.hide();
   })
+
+  //for binding editor title with title input field.
+  // const title = "Some title";
+  // let inputTitle = document.querySelector('#title');
+  // inputTitle.value = title;
+  // let editorTitle = editor.document.createElement('font');
+  // editorTitle.setAttribute('size','7');
+  // editor.document.body.prepend(editorTitle);
+  // editorTitle.textContent = title;
+
+  // inputTitle.addEventListener('input', () => {
+  //   editorTitle.textContent = inputTitle.value;
+  // });
+
+  // inputTitle.addEventListener('change', () => {
+  //   // editorTitle.textContent = inputTitle.value;
+  //   console.log();
+  // });
 }
 
 //to execute commands on editor
@@ -46,10 +74,15 @@ function transform(option, argument) {
 
 function onCreateLinkClick() {
   var link = window.prompt('Enter link URL');
-  transform('createLink', link);
+  if(link != null) transform('createLink', link);
 }
 
-function onCodeBlockClick() {
+function onInsertImageClick(){
+  var link = window.prompt('Enter image URL');
+  if(link != null) transform('insertImage', link);
+}
+
+function onAddCodeBlockClick() {
   let parent = editor.document.getSelection().focusNode.parentElement;
 
   //if we don't do this the tag gets attached to the main content, not the editor
@@ -76,6 +109,7 @@ function onCodeBlockClick() {
   //TODO: fix issue - when a empty code block is created the code is entered inside pre tag not code tag
 }
 
+// ----------------------------------- Dropdown starts ---------------------------------------------//
 class DropDown {
   constructor(element) {
     this.element = element;
@@ -127,3 +161,49 @@ class DropDown {
     this.listDiv.classList.remove('active');
   }
 }
+// ------------------------------------ Dropdown ends --------------------------------------------//
+
+// -------------------------------- Emoji Dropdown starts ---------------------------------------//
+
+
+class EmojiDropDown{
+  constructor(element) {
+    this.element = element;
+    this.listDiv = document.createElement('div');
+  }
+
+  init(onEmojiSelected){
+    this.listDiv.classList.add('emoji-dropdown-div');
+    let faceEmojis = ['😀', '😁', '😂', '🤣', '😃', '😄', '😅', '😆', '😉', '😊', '😋', '😎', '😍', '😘', '🥰', '😗', '😙', '😚', '🙂', '🤗', '🤩', '🤔', '🤨', '😐', '😑', '😶', '🙄', '😏', '😣', '😥', '😮', '🤐', '😯', '😪', '😫', '😴', '😌', '😛', '😜', '😝', '🤤', '😒', '😓', '😔', '😕', '🙃', '🤑', '😲', '☹️', '🙁', '😖', '😞', '😟', '😤', '😢', '😭', '😦', '😧', '😨', '😩', '🤯', '😬', '😰', '😱', '🥵', '🥶', '😳', '🤪', '😵', '😡', '😠', '🤬', '😷', '🤒', '🤕', '🤢', '🤮', '🤧', '😇', '🤠', '🤡', '🥳', '🥴', '🥺', '🤥', '🤫', '🤭', '🧐', '🤓', '😈', '👿', '👹', '👺', '💀', '👻', '👽', '🤖', '💩', '😺', '😸', '😹', '😻', '😼', '😽', '🙀', '😿', '😾'];
+    faceEmojis.forEach((e) =>{
+      let emoji = document.createElement('p');
+      emoji.classList.add('emoji-dropdown-item');
+      emoji.style.float = 'left';
+      emoji.textContent = e;
+      emoji.addEventListener('click', () =>{
+        onEmojiSelected(e);
+        this.hide();
+      });
+      this.listDiv.appendChild(emoji);
+    });
+
+
+    this.element.appendChild(this.listDiv);
+    
+    this.element.addEventListener('click', (e) => {
+      //this is done to prevent listening to click from the dropdown content/items
+      if (e.target != this.element) return;
+
+      this.listDiv.classList.toggle('active');
+    })
+
+    this.listDiv.addEventListener('click', () => {
+      this.hide();
+    })
+  }
+
+  hide() {
+    this.listDiv.classList.remove('active');
+  }
+}
+// -------------------------------- Emoji Dropdown ends --------------------------------------//

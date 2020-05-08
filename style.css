@@ -35,7 +35,6 @@ input[type="text"] {
 }
 .options {
   width: 100%;
-  height: 30pt;
   margin-top: 5pt;
   border-top: 1px solid #ddd;
 }
@@ -80,6 +79,55 @@ input[type="number"] {
   outline: none;
 }
 
+/*-------------------------- emoji dropdown related css - start ------------------------ */
+
+.emoji-dropdown-trigger{
+  text-align: center;
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  height: 30pt;
+  width: 30pt;
+  background-color: #fff;
+}
+
+.emoji-dropdown-div{
+  width: 300px;
+  max-height: 400px;
+  overflow: scroll;
+  border-radius: 4px;
+  left: 0;
+  right: 0;
+  top: 104%;
+  background-color: white;
+  border: 1px solid grey;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s;
+  position: absolute;
+}
+
+.emoji-dropdown-div.active{
+  visibility: visible;
+  opacity: 1;
+}
+
+.emoji-dropdown-item{
+  margin: 0;
+  padding: 8px 8px;
+  cursor: pointer;
+}
+
+.emoji-dropdown-item:hover{
+  background-color: #ddd;
+}
+
+/*-------------------------- emoji dropdown related css - end ------------------------ */
+
+/*------------------------------ dropdown related css - start ---------------------------- */
+
 .dropdown-trigger{
   margin: 0 10px;
   cursor: pointer;
@@ -98,10 +146,14 @@ input[type="number"] {
 
 .dropdown-div{
   min-width: 120px;
+  max-width: 300px;
+  max-height: 400px;
+  overflow: scroll;
   border-radius: 4px;
   left: 0;
   right: 0;
   top: 104%;
+  background-color: white;
   border: 1px solid grey;
   visibility: hidden;
   opacity: 0;
@@ -127,3 +179,4 @@ input[type="number"] {
 .align-end{
   float: right;
 }
+/*------------------------------ dropdown related css - end ---------------------------- */

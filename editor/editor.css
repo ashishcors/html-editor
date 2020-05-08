@@ -1,0 +1,16 @@
+
+img {
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+  width: 40%;
+  margin-left: 30%;
+}
+
+
+@media only screen and (max-width : 800px) {
+  img {
+    width: 100%;
+    margin-left: 0%;
+  }
+}
