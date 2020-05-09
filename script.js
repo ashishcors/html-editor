@@ -1,19 +1,26 @@
 //enable html design mode for editor
 editor.document.designMode = "On";
 
+//declare dropdowns
 let styleDropdown, fontDropdown, emojiDropdown;
+
+const justify = {
+  left: 'Left',
+  center: 'Center',
+  right: 'Right',
+}
 
 let activeProperties = {
   bold: false,
   italic: false,
   strikeThrough: false,
   underline: false,
-  justify: 'Left',
+  justify: justify.left,
   insertOrderedList: true,
   insertunorderedList: true,
 };
 
-//initialize everything went the window loads
+//initialize everything when the window loads
 window.onload = function () {
   //since the editor is an iframe, it doesn't contain any script or css.
   //following code add prism.css & editor.css to the editor
@@ -70,15 +77,18 @@ window.onload = function () {
       emojiDropdown.hide();
   });
 
+  //listen to all change events on editor to change properties accordingly
   addMultipleEventListener(editor.document.body, ['keydown', 'click', 'focus'], (e) => {
     console.log(e);
   });
 }
 
-function addMultipleEventListener(element, events, onEvent) {
+
+//register multiple eventlisteners on an element
+function addMultipleEventListener(element, events, onEventCallback) {
   events.forEach((event) => {
     element.addEventListener(event, (e) => {
-      onEvent(e);
+      onEventCallback(e);
     });
   });
 }
