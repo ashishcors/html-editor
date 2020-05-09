@@ -4,18 +4,12 @@ editor.document.designMode = "On";
 //declare dropdowns
 let styleDropdown, fontDropdown, emojiDropdown;
 
-const justify = {
-  left: 'Left',
-  center: 'Center',
-  right: 'Right',
-}
-
+//to maintain active option state
 let activeProperties = {
   bold: false,
   italic: false,
   strikeThrough: false,
   underline: false,
-  justify: justify.left,
   insertOrderedList: false,
   insertUnorderedList: false,
   codeBlock: false,
@@ -70,7 +64,6 @@ window.onload = function () {
   });
 
   //to hide the dropdowns of the use clicks on outside the dropdown
-  //TODO:The dropdown doesn't hides when clicked on editor area.
   document.querySelector('body').addEventListener('click', (e) => {
     if (e.target != styleDropdown.element) styleDropdown.hide();
     if (e.target != fontDropdown.element) fontDropdown.hide();
@@ -84,6 +77,7 @@ window.onload = function () {
   });
 }
 
+//whenever anything changes on editor this should be called
 function onEditorChange() {
   //TODO:add debounce to this
   let currentElement = editor.window.getSelection().getRangeAt(0).commonAncestorContainer;
@@ -96,8 +90,10 @@ function onEditorChange() {
   activeProperties.insertUnorderedList = isDescendantOf(currentElement, 'UL');
   activeProperties.codeBlock = isDescendantOf(currentElement, 'PRE');
   updateOptionsState();
+  hideAllDropdown();
 }
 
+//update the UI base on activeProperties
 function updateOptionsState() {
   setElementActiveState(document.querySelector('#btn-bold'), activeProperties.bold);
   setElementActiveState(document.querySelector('#btn-italic'), activeProperties.italic);
@@ -108,6 +104,7 @@ function updateOptionsState() {
   setElementActiveState(document.querySelector('#btn-code-block'), activeProperties.codeBlock);
 }
 
+//check id if the element is child of particular parent
 function isDescendantOf(element, tag) {
   while (element = element.parentNode) {
     if (element.tagName == tag) return true;
@@ -157,7 +154,7 @@ function onInsertImageClick() {
   if (link != null) transform('insertImage', link);
 }
 
-function onAddCodeBlockClick() {
+function onAddCodeBlockClick(element) {
   //get current selection & range
   //more on selection & range at: https://javascript.info/selection-range#selection-events
   let selection = editor.window.getSelection();
@@ -166,17 +163,23 @@ function onAddCodeBlockClick() {
   //code tag needs to be inside pre tag
   //both tags need to have language class
   //selected text should be inside code tag
+  console.log(range.commonAncestorContainer);
 
   //create pre tag and code tag and add content to code tag, add css
-  if (!activeProperties.codeBlock) {
+  if (!isDescendantOf(range.commonAncestorContainer, 'PRE')) {
     let preTag = editor.document.createElement('pre');
     let codeTag = editor.document.createElement('code');
+    let selectedText = range.extractContents();
     codeTag.classList.add('language-css');
     preTag.classList.add('language-css');
-    range.surroundContents(codeTag);
-    range.surroundContents(preTag);
+    codeTag.appendChild(selectedText);
+    preTag.appendChild(codeTag);
+    range.insertNode(editor.document.createElement('br'));
+    range.insertNode(preTag);
+    setElementActiveState(element, true);
   } else {
-    //TODO
+
+    setElementActiveState(element, false);
   }
   //TODO: fix issue - when a empty code block is created the code is entered inside pre tag not code tag
 }

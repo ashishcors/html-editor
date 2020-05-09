@@ -12,10 +12,11 @@ class Dropdown {
     children.forEach((child) => {
       const originalOnClick = child.onclick;
       child.addEventListener('click', () => {
+        //sets the button text
+        console.log(child.textContent);
+        this.element.childNodes[0].nodeValue = child.textContent;
         //fires the oroginal on click attribute
         originalOnClick();
-        //sets the button text
-        this.element.childNodes[0].nodeValue = child.innerText;
       });
     });
     //remove the content from element
@@ -30,7 +31,6 @@ class Dropdown {
       if (e.target != this.element && e.target.tagName != "svg" && e.target.tagName != "path")
         return;
       this.listDiv.classList.toggle('active');
-      return false;
     });
   }
   hide() {
