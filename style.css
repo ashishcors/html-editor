@@ -69,6 +69,7 @@ button {
 
 button:active {
     color: #333;
+    background-color: #ccc;
 }
 
 select {

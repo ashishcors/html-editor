@@ -15,22 +15,22 @@
     <h1 id="main-title">New Blog</h1>
     <input type="text" placeholder="Title" id="title">
     <div class="options">
-      <button onClick="transform('bold', null)">
+      <button onClick="transform('bold', null)" id="btn-bold">
         <i class="fas fa-bold"></i>
       </button>
-      <button onClick="transform('italic', null)">
+      <button onClick="transform('italic', null)" id="btn-italic">
         <i class="fas fa-italic"></i>
       </button>
-      <button onClick="transform('strikeThrough', null)">
+      <button onClick="transform('strikeThrough', null)" id="btn-strikethrough">
         <i class="fas fa-strikethrough"></i>
       </button>
-      <button onClick="transform('underline', null)">
+      <button onClick="transform('underline', null)" id="btn-underline">
         <i class="fas fa-underline"></i>
       </button>
       <div class="seperator"></div>
-      <div id="emoji-button" class="emoji-dropdown-trigger">😀</div>
+      <div id="btn-emoji" class="emoji-dropdown-trigger">😀</div>
       <div class="seperator"></div>
-      <div class="dropdown-trigger" id="style-button">
+      <div class="dropdown-trigger" id="btn-style">
         Normal
         <i class="fas fa-angle-down align-end"></i>
         <div class="dropdown-content">
@@ -44,32 +44,35 @@
         </div>
       </div>
       <div class="seperator"></div>
-      <div class="dropdown-trigger" id="font-button">
+      <div class="dropdown-trigger" id="btn-font">
         Verdana
         <i class="fas fa-angle-down align-end"></i>
         <div class="dropdown-content">
-          <p class="dropdown-item" onclick="transform('fontName', 'Verdana')" style="font-family: 'Verdana';">Verdana</p>
-          <p class="dropdown-item" onclick="transform('fontName', 'Times New Roman')" style="font-family: 'Times New Roman';">Times New Roman</p>
+          <p class="dropdown-item" onclick="transform('fontName', 'Verdana')" style="font-family: 'Verdana';">Verdana
+          </p>
+          <p class="dropdown-item" onclick="transform('fontName', 'Times New Roman')"
+            style="font-family: 'Times New Roman';">Times New Roman</p>
           <p class="dropdown-item" onclick="transform('fontName', 'Arial')" style="font-family: 'Arial';">Arial</p>
-          <p class="dropdown-item" onclick="transform('fontName', 'Courier New')" style="font-family: 'Courier New';">Courier New</p>
+          <p class="dropdown-item" onclick="transform('fontName', 'Courier New')" style="font-family: 'Courier New';">
+            Courier New</p>
           <p class="dropdown-item" onclick="transform('fontName', 'Tahoma')" style="font-family: 'Tahoma';">Tahoma</p>
         </div>
       </div>
       <div class="seperator"></div>
-      <button onClick="transform('justifyLeft', null)">
+      <button onClick="transform('justifyLeft', null)" id="btn-justify-left">
         <i class="fas fa-align-left"></i>
       </button>
-      <button onClick="transform('justifyCenter', null)">
+      <button onClick="transform('justifyCenter', null)" id="btn-justify-center">
         <i class="fas fa-align-center"></i>
       </button>
-      <button onClick="transform('justifyRight', null)">
+      <button onClick="transform('justifyRight', null)" id="btn-justify-right">
         <i class="fas fa-align-right"></i>
       </button>
       <div class="seperator"></div>
-      <button onClick="transform('insertOrderedList', null)">
+      <button onClick="transform('insertOrderedList', null)" id="btn-ordered-list">
         <i class="fas fa-list-ol"></i>
       </button>
-      <button onClick="transform('insertUnorderedList', null)">
+      <button onClick="transform('insertUnorderedList', null)" id="btn-unordered-list">
         <i class="fas fa-list-ul"></i>
       </button>
       <div class="seperator"></div>
@@ -92,6 +95,8 @@
     integrity="sha384-GqVMZRt5Gn7tB9D9q7ONtcp4gtHIUEW/yG7h98J7IpE3kpi+srfFyyB/04OV6pG0"
     crossorigin="anonymous"></script>
   <script type="text/javascript" src="prism/prism.js"></script>
+  <script src="./components/dropdown.js"></script>
+  <script src="./components/emoji-dropdown.js"></script>
   <script src="./script.js"></script>
 
 </body>
