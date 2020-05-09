@@ -1,3 +1,5 @@
 # html-editor
 HTML Rich Text Editor
-Inspired by https://codepen.io/larzaugustin/pen/qQByOJ
+Live at: https://jasperx21.github.io/html-editor/
+
+Inspired by: https://codepen.io/larzaugustin/pen/qQByOJ
