@@ -23,7 +23,7 @@ window.onload = function () {
   let prismCss = editor.document.createElement('link');
   prismCss.rel = 'stylesheet';
   prismCss.type = 'text/css';
-  prismCss.href = 'prism/prism.css';
+  prismCss.href = 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.20.0/themes/prism.min.css';
   head.appendChild(prismCss);
   let editorCss = editor.document.createElement('link');
   editorCss.rel = 'stylesheet';
@@ -35,18 +35,18 @@ window.onload = function () {
   let body = editor.document.getElementsByTagName('body')[0];
   let script = editor.document.createElement('script');
   script.type = 'text/javascript';
-  script.src = 'prism/prism.js';
+  script.src = 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.20.0/prism.min.js';
   body.appendChild(script);
 
   //set the default fontName of the editor to Verdana
   transform('fontName', 'Verdana');
 
   //initializes the dropdown for text-style button
-  styleDropdown = new Dropdown(document.querySelector("#btn-style"));
+  styleDropdown = new Dropdown(document.querySelector("#btn-style"), intialValue = 'Normal');
   styleDropdown.init();
 
   //initializes the dropdown for font-family button 
-  fontDropdown = new Dropdown(document.querySelector("#btn-font"));
+  fontDropdown = new Dropdown(document.querySelector("#btn-font"), intialValue = 'Verdana');
   fontDropdown.init();
 
   //initializes the dropdown for emoji button 
@@ -104,27 +104,9 @@ function updateOptionsState() {
   setElementActiveState(document.querySelector('#btn-code-block'), activeProperties.codeBlock);
 }
 
-//check id if the element is child of particular parent
-function isDescendantOf(element, tag) {
-  while (element = element.parentNode) {
-    if (element.tagName == tag) return true;
-  }
-  return false;
-}
-
 function setElementActiveState(element, isActive) {
   if (isActive) element.classList.add('active');
   else element.classList.remove('active');
-}
-
-
-//register multiple eventlisteners on an element
-function addMultipleEventListener(element, events, onEventCallback) {
-  events.forEach((event) => {
-    element.addEventListener(event, () => {
-      onEventCallback();
-    });
-  });
 }
 
 function hideAllDropdown() {
@@ -177,9 +159,6 @@ function onAddCodeBlockClick(element) {
     range.insertNode(editor.document.createElement('br'));
     range.insertNode(preTag);
     setElementActiveState(element, true);
-  } else {
-
-    setElementActiveState(element, false);
   }
   //TODO: fix issue - when a empty code block is created the code is entered inside pre tag not code tag
 }

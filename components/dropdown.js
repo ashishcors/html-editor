@@ -1,8 +1,10 @@
 class Dropdown {
-  constructor(element) {
+  constructor(element, defaultValue = 'Select Option', initialValue = null) {
     this.element = element;
     //creates an empty div element
     this.listDiv = document.createElement('div');
+    this._value = (initialValue) ? initialValue : defaultValue;
+    this.element.childNodes[0].nodeValue = this._value;
   }
   init() {
     //grab the content of the dropdown
@@ -13,8 +15,8 @@ class Dropdown {
       const originalOnClick = child.onclick;
       child.addEventListener('click', () => {
         //sets the button text
-        console.log(child.textContent);
-        this.element.childNodes[0].nodeValue = child.textContent;
+        this._value = child.textContent;
+        this.element.childNodes[0].nodeValue = this._value;
         //fires the oroginal on click attribute
         originalOnClick();
       });
@@ -33,7 +35,12 @@ class Dropdown {
       this.listDiv.classList.toggle('active');
     });
   }
+
   hide() {
     this.listDiv.classList.remove('active');
+  }
+
+  getValue() {
+    return (this._value == 'Select Option') ? null : this._value;
   }
 }

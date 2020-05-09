@@ -34,7 +34,7 @@ body {
 
 input[type="text"] {
     height: 20pt;
-    width: 100%;
+    width: 80%;
     padding: 0;
     border: 0;
     outline: none;
@@ -111,7 +111,7 @@ input[type="number"] {
 
 .emoji-dropdown-div {
     width: 262px;
-    max-height: 400px;
+    max-height: 300px;
     overflow: scroll;
     border-radius: 4px;
     left: 0;
@@ -132,6 +132,7 @@ input[type="number"] {
 
 .emoji-dropdown-div::-webkit-scrollbar{
     width: 5px;
+    height: 0px;
 }
 /* Track */
 .emoji-dropdown-div::-webkit-scrollbar-track {
@@ -212,7 +213,7 @@ input[type="number"] {
 .dropdown-div {
     min-width: 120px;
     max-width: 300px;
-    max-height: 400px;
+    max-height: 300px;
     overflow: scroll;
     border-radius: 4px;
     left: 0;
@@ -224,6 +225,25 @@ input[type="number"] {
     opacity: 0;
     transition: opacity 0.3s;
     position: absolute;
+}
+
+.dropdown-div::-webkit-scrollbar{
+    width: 5px;
+    height: 0px;
+}
+/* Track */
+.dropdown-div::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+  
+  /* Handle */
+.dropdown-div::-webkit-scrollbar-thumb {
+  background: #888;
+}
+  
+/* Handle on hover */
+.dropdown-div::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
 
 .dropdown-div.active {
