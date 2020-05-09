@@ -16,8 +16,9 @@ let activeProperties = {
   strikeThrough: false,
   underline: false,
   justify: justify.left,
-  insertOrderedList: true,
-  insertunorderedList: true,
+  insertOrderedList: false,
+  insertUnorderedList: false,
+  codeBlock: false,
 };
 
 //initialize everything when the window loads
@@ -78,17 +79,53 @@ window.onload = function () {
   });
 
   //listen to all change events on editor to change properties accordingly
-  addMultipleEventListener(editor.document.body, ['keydown', 'click', 'focus'], (e) => {
-    console.log(e);
+  addMultipleEventListener(editor.document.body, ['keydown', 'click', 'focus'], () => {
+    onEditorChange();
   });
+}
+
+function onEditorChange() {
+  //TODO:add debounce to this
+  let currentElement = editor.window.getSelection().getRangeAt(0).commonAncestorContainer;
+  if (currentElement.tagName == 'BODY') return;
+  activeProperties.bold = isDescendantOf(currentElement, 'B');
+  activeProperties.italic = isDescendantOf(currentElement, 'I');
+  activeProperties.strikeThrough = isDescendantOf(currentElement, 'STRIKE');
+  activeProperties.underline = isDescendantOf(currentElement, 'U');
+  activeProperties.insertOrderedList = isDescendantOf(currentElement, 'OL');
+  activeProperties.insertUnorderedList = isDescendantOf(currentElement, 'UL');
+  activeProperties.codeBlock = isDescendantOf(currentElement, 'PRE');
+  updateOptionsState();
+}
+
+function updateOptionsState() {
+  setElementActiveState(document.querySelector('#btn-bold'), activeProperties.bold);
+  setElementActiveState(document.querySelector('#btn-italic'), activeProperties.italic);
+  setElementActiveState(document.querySelector('#btn-strikethrough'), activeProperties.strikeThrough);
+  setElementActiveState(document.querySelector('#btn-underline'), activeProperties.underline);
+  setElementActiveState(document.querySelector('#btn-ordered-list'), activeProperties.insertOrderedList);
+  setElementActiveState(document.querySelector('#btn-unordered-list'), activeProperties.insertUnorderedList);
+  setElementActiveState(document.querySelector('#btn-code-block'), activeProperties.codeBlock);
+}
+
+function isDescendantOf(element, tag) {
+  while (element = element.parentNode) {
+    if (element.tagName == tag) return true;
+  }
+  return false;
+}
+
+function setElementActiveState(element, isActive) {
+  if (isActive) element.classList.add('active');
+  else element.classList.remove('active');
 }
 
 
 //register multiple eventlisteners on an element
 function addMultipleEventListener(element, events, onEventCallback) {
   events.forEach((event) => {
-    element.addEventListener(event, (e) => {
-      onEventCallback(e);
+    element.addEventListener(event, () => {
+      onEventCallback();
     });
   });
 }
@@ -105,6 +142,10 @@ function transform(option, argument) {
   editor.document.execCommand(option, false, argument);
 }
 
+function onOptionClick(element, option) {
+  transform(option, null);
+  setElementActiveState(element, activeProperties[option] = !activeProperties[option]);
+}
 
 function onCreateLinkClick() {
   var link = window.prompt('Enter link URL');
@@ -127,12 +168,15 @@ function onAddCodeBlockClick() {
   //selected text should be inside code tag
 
   //create pre tag and code tag and add content to code tag, add css
-  let preTag = editor.document.createElement('pre');
-  let codeTag = editor.document.createElement('code');
-  codeTag.classList.add('language-css');
-  preTag.classList.add('language-css');
-  preTag.appendChild(codeTag);
-  range.surroundContents(preTag);
-
+  if (!activeProperties.codeBlock) {
+    let preTag = editor.document.createElement('pre');
+    let codeTag = editor.document.createElement('code');
+    codeTag.classList.add('language-css');
+    preTag.classList.add('language-css');
+    range.surroundContents(codeTag);
+    range.surroundContents(preTag);
+  } else {
+    //TODO
+  }
   //TODO: fix issue - when a empty code block is created the code is entered inside pre tag not code tag
 }
